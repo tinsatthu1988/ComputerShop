@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ShopmeCommon/pom.xml" />
         <option value="$PROJECT_DIR$/ShopmwWebParent/pom.xml" />
+        <option value="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/pom.xml" />
+        <option value="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/pom.xml" />
       </list>
     </option>
   </component>
