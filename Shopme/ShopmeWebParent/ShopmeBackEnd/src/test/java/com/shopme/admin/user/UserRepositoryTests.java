@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
@@ -77,6 +79,14 @@ public class UserRepositoryTests {
     public void testDeleteUser() {
         Integer userId = 4;
         repo.deleteById(userId);
+    }
+
+    @Test
+    public void testGetUserByEmail(){
+        String email = "tinsatthu1988@gmail.com";
+        User user = repo.getUserByEmail(email);
+
+        assertThat(user).isNotNull();
     }
 
 }
