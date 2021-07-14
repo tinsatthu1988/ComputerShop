@@ -104,4 +104,11 @@ public class UserRepositoryTests {
 
     }
 
+    @Test
+    public void testEnableUser() {
+        Integer id = 1;
+        repo.updateEnabledStatus(id, true);
+
+    }
+
 }
