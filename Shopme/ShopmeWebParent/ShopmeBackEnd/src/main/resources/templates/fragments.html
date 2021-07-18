@@ -37,22 +37,24 @@
     <div th:fragment= "category_status">
         <a
                 th:if="${cat.enabled == true}" class="fas fa-check-circle fa-2x icon-green"
-                title="Disable this category" href="">
+                title="Disable this category" th:href="@{'/categories/' + ${cat.id} + '/enabled/false'}">
         </a>
         <a
                 th:if="${cat.enabled == false}" class="fas fa-circle fa-2x icon-dark"
-                title="Enable this category" href="">
+                title="Enable this category" th:href="@{'/categories/' + ${cat.id} + '/enabled/true'}">
         </a>
     </div>
 
-    <div th:fragment= "category_actions">
+    <div th:fragment= "category_actions" th:remove="tag">
         <a class="fas fa-edit fa-2x icon-green"
            title= "Edit this user" th:href="@{'/categories/edit/' + ${cat.id}}">
         </a>
         &nbsp;
-        <a class="fas fa-trash fa-2x icon-dark link-delete"
-           title="Delete this category" href="">
-        </a>
+        <th:block th:if="${cat.hasChildren == false}">
+            <a class="fas fa-trash fa-2x icon-dark link-delete"
+               title="Delete this category" th:href="@{'/categories/delete/' + ${cat.id}}" th:entityId="${cat.id}">
+            </a>
+        </th:block>
     </div>
 </body>
 </html>
