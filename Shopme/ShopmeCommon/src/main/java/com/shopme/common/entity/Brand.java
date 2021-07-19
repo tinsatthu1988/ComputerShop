@@ -35,6 +35,22 @@ public class Brand {
     )
     private Set<Category> categories = new HashSet<>();
 
+    public Brand(Integer id, String name, String logo, Set<Category> categories) {
+        this.id = id;
+        this.name = name;
+        this.logo = logo;
+        this.categories = categories;
+    }
+
+    public Brand() {
+
+    }
+
+    public Brand(String name) {
+        this.name = name;
+        this.logo = "brand-logo.png";
+    }
+
     public Integer getId() {
         return id;
     }
@@ -67,5 +83,9 @@ public class Brand {
         this.categories = categories;
     }
 
+    @Override
+    public String toString() {
+        return "Brand [id=" + id + ", name=" + name + ", categories=" + categories + "]";
+    }
 
 }

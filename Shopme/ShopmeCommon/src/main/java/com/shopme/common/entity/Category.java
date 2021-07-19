@@ -160,8 +160,11 @@ public class Category {
         this.hasChildren = hasChildren;
     }
 
-
     @Transient
     private boolean hasChildren;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
