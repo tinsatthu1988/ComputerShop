@@ -9,6 +9,8 @@ import com.shopme.common.entity.Product;
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
     public Product findByName(String name);
 
+    public long countById(Integer id);
+
     @Query("UPDATE Product p SET p.enabled = ?2 WHERE p.id = ?1")
     @Modifying
     public void updateEnabledStatus(Integer id, boolean enabled);
