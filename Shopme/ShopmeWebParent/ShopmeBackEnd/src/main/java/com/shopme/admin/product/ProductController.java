@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.shopme.common.entity.Product;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductController {
@@ -46,10 +47,9 @@ public class ProductController {
     }
 
     @PostMapping("/products/save")
-    public String saveCategory(Product product)  {
-        System.out.println("Product name: " + product.getName());
-        System.out.println("Brand ID: " + product.getBrand().getId());
-        System.out.println("Category ID: " + product.getCategory().getId());
+    public String saveCategory(Product product, RedirectAttributes ra)  {
+        productService.save(product);
+        ra.addFlashAttribute("message", "The product has been saved successfully.");
 
         return "redirect:/products";
     }
