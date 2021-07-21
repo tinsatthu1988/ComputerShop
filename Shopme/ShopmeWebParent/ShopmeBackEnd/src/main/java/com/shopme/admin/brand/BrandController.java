@@ -122,7 +122,7 @@ public class BrandController {
         try {
             brandService.delete(id);
 
-            String brandDir = "../brand-logos/" + id;
+            String brandDir = "brand-logos/" + id;
             FileUploadUtil.removeDir(brandDir);
 
             redirectAttributes.addFlashAttribute("message", "The brand ID " + id + " has been deleted successfully");
