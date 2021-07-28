@@ -50,10 +50,15 @@ function deleteState(){
     stateId = dropDownStates.val();
     url = contextPath + "states/delete/" + stateId;
 
-    $.get(url, function(){
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        beforeSend: function(xhr){
+            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+        }
+    }).done(function(){
         $("#dropDownStates option[value='"+ stateId + "']").remove();
         changeFormStateToNewState();
-    }).done(function(){
         showToastMessage("The state has been deleted");
     }).fail(function(){
         showToastMessage("ERROR: Could not connect to server or server encountered an error");
