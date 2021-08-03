@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class CustomerService {
-    public static final int CUSTOMERS_PER_PAGE = 10;
+    public static final int CUSTOMERS_PER_PAGE = 5;
 
     @Autowired private CustomerRepository customerRepo;
     @Autowired private CountryRepository countryRepo;
@@ -69,13 +69,17 @@ public class CustomerService {
     }
 
     public void save(Customer customerInForm){
+        Customer customerInDB = customerRepo.findById(customerInForm.getId()).get();
         if(!customerInForm.getPassword().isEmpty()){
             String encodePassword = passwordEncoder.encode(customerInForm.getPassword());
             customerInForm.setPassword(encodePassword);
         } else {
-            Customer customerInDB = customerRepo.findById(customerInForm.getId()).get();
             customerInForm.setPassword(customerInDB.getPassword());
         }
+        customerInForm.setEnabled(customerInDB.isEnabled());
+        customerInForm.setCreatedTime(customerInDB.getCreatedTime());
+        customerInForm.setVerificationCode(customerInDB.getVerificationCode());
+
         customerRepo.save(customerInForm);
     }
 

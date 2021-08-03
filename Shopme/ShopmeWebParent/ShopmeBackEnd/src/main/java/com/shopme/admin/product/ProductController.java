@@ -77,6 +77,7 @@ public class ProductController {
         model.addAttribute("reverseSortDir", reverseSortDir);
         model.addAttribute("keyword", keyword);
         model.addAttribute("listCategories", listCategories);
+        model.addAttribute("moduleURL", "/products");
 
         return "products/products";
     }
