@@ -100,7 +100,7 @@ public class UserController {
             return "users/user_form";
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/users";
+            return "redirect:/users/page/1?sortField=firstName&sortDir=asc";
         }
     }
 
@@ -112,7 +112,7 @@ public class UserController {
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
         }
-        return "redirect:/users";
+        return "redirect:/users/page/1?sortField=firstName&sortDir=asc";
     }
 
     @GetMapping("/users/{id}/enabled/{status}")
@@ -123,7 +123,7 @@ public class UserController {
         String status = enabled ? "enabled" : "disabled";
         String message = "The user ID " + id + " has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/users";
+        return "redirect:/users/page/1?sortField=firstName&sortDir=asc";
 
     }
 

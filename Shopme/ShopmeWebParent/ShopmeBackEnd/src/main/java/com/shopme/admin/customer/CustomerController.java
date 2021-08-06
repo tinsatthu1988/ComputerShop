@@ -54,7 +54,7 @@ public class CustomerController {
         String status = enabled ? "enabled" : "disabled";
         String message = "The Customer ID " + id + " has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/customers";
+        return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
     }
 
     @GetMapping("/customers/details/{id}")
@@ -67,7 +67,7 @@ public class CustomerController {
             return "customers/customer_detail_modal";
         } catch (CustomerNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/customers";
+            return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
         }
     }
 
@@ -84,7 +84,7 @@ public class CustomerController {
             return "customers/customer_form";
         } catch (CustomerNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/customers";
+            return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
         }
     }
 
@@ -92,7 +92,7 @@ public class CustomerController {
     public String saveCustomer(Customer customer, RedirectAttributes ra) {
         service.save(customer);
         ra.addFlashAttribute("message", "The Customer ID " + customer.getId() + " has been updated successfully.");
-        return "redirect:/customers";
+        return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
     }
 
     @GetMapping("/customers/delete/{id}")
@@ -103,7 +103,7 @@ public class CustomerController {
         } catch (CustomerNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
         }
-        return "redirect:/customers";
+        return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
 
     }
 }
