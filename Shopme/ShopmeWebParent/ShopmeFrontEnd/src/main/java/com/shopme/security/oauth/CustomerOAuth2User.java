@@ -7,11 +7,12 @@ import java.util.Collection;
 import java.util.Map;
 
 public class CustomerOAuth2User implements OAuth2User {
-
+    private String clientName;
     private OAuth2User oauth2User;
 
-    public CustomerOAuth2User(OAuth2User user) {
+    public CustomerOAuth2User(OAuth2User user, String clientName) {
         this.oauth2User = user;
+        this.clientName = clientName;
     }
 
     @Override
@@ -35,5 +36,9 @@ public class CustomerOAuth2User implements OAuth2User {
 
     public String getFullName(){
         return oauth2User.getAttribute("name");
+    }
+
+    public String getClientName() {
+        return clientName;
     }
 }
