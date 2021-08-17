@@ -73,6 +73,11 @@
     contextPath = "[[@{/}]]";
     csrfHeaderName = "[[${_csrf.headerName}]]";
     csrfValue = "[[${_csrf.token}]]";
+
+    decimalDigits = [[${DECIMAL_DIGITS}]];
+    decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
+    thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
+
  </script>
 <script type="text/javascript" th:src="@{/js/number_format.js}"></script>
 <script type="text/javascript" th:src="@{/js/shopping_cart.js}"></script>
