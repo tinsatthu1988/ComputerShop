@@ -120,40 +120,8 @@
   <div th:replace="fragments :: footer"></div>
 </div>
 <script type="text/javascript">
-  var dropdownCountries;
-  var dropdownStates;
-
-  $(document).ready(function (){
-    dropdownCountries = $("#country");
-    dropdownStates = $("#listStates");
-
-    dropdownCountries.on("change", function (){
-      loadStates4Country();
-      ("#state").val("").focus();
-    });
-
-    loadStates4Country();
-
-    $("#buttonCancel").click(function (){
-      window.location = "[[@{/customers}]]";
-    })
-  });
-
-  function loadStates4Country(){
-    selectedCountry = $("#country option:selected");
-    countryId = selectedCountry.val();
-    url = "[[@{/states/list_by_country/}]]" + countryId;
-
-    $.get(url, function(responseJSON){
-      dropdownStates.empty();
-
-      $.each(responseJSON, function(index, state){
-        $("<option>").val(state.name).text(state.name).appendTo(dropdownStates);
-      });
-    }).fail(function(){
-      showErrorModal("Error loading states/provinces for the selected country.");
-    });
-  }
+  contextPath = "[[@{/}]]";
+  moduleURL = "[[@{/customers}]]";
 
   function checkEmailUnique(form) {
     let url = "[[@{/customers/check_email}]]";
@@ -177,7 +145,7 @@
     return false;
   }
 </script>
-
+<script th:src="@{/js/common_form_country_state.js}"></script>
 <script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>

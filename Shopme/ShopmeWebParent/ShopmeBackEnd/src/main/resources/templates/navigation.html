@@ -51,7 +51,8 @@
                                sec:authorize="hasAnyAuthority('Admin','Editor')">Create New</a>
                             <a class="dropdown-item" th:href="@{/products}">View All</a>
                         </div>
-                    </li>                </th:block>
+                    </li>
+                </th:block>
 
                 <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson')">
                     <li class="nav-item">
@@ -61,7 +62,7 @@
 
                 <th:block sec:authorize="hasAnyAuthority('Admin','Salesperson')">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
+                        <a class="nav-link" th:href="@{/shipping_rates}">Shipping Rate</a>
                     </li>
                 </th:block>
 
