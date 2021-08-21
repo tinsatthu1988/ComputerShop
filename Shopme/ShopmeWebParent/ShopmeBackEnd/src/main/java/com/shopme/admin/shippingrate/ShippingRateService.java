@@ -31,7 +31,7 @@ public class ShippingRateService {
         ShippingRate rateInDB = shipRepo.findByCountryAndState(
                 rateInForm.getCountry().getId(), rateInForm.getState());
         boolean foundExistingRateInNewMode = rateInForm.getId() == null && rateInDB != null;
-        boolean foundDifferentExistingRateInEditMode = rateInForm.getId() != null && rateInDB != null && rateInDB.getId() != rateInForm.getId();
+        boolean foundDifferentExistingRateInEditMode = rateInForm.getId() != null && rateInDB != null && !rateInDB.equals(rateInForm);
 
         if(foundExistingRateInNewMode || foundDifferentExistingRateInEditMode){
             throw new ShippingRateAlreadyExistsException("There's already a rate for the destination "
