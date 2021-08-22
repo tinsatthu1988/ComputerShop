@@ -83,10 +83,10 @@ public class CustomerController {
     }
 
     @GetMapping("/verify")
-    public String verifyAccount(@Param("code") String code, Model model){
+    public String verifyAccount(String code, Model model) {
         boolean verified = customerService.verify(code);
 
-        return  "register/" + (verified ? "verify_success" : "verify_fail");
+        return "register/" + (verified ? "verify_success" : "verify_fail");
     }
 
     @GetMapping("/account_details")
@@ -107,7 +107,15 @@ public class CustomerController {
         customerService.update(customer);
         ra.addFlashAttribute("message", "Your account details have been updated");
         updateNameForAuthenticatedCustomer(customer, request);
-        return "redirect:/account_details";
+
+        String redirectOption = request.getParameter("redirect");
+        String redirectURL = "redirect:/account_details";
+
+        if ("address_book".equals(redirectOption)) {
+            redirectURL = "redirect:/address_book";
+        }
+
+        return redirectURL;
     }
 
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
