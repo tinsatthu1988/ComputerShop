@@ -1,8 +1,5 @@
 package com.shopme.admin.paging;
 
-import com.shopme.admin.user.UserService;
-import com.shopme.common.entity.Brand;
-import com.shopme.common.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +24,7 @@ public class PagingAndSortingHelper {
         this.keyword = keyword;
     }
 
-    public void updateModeAttributes(int pageNum, Page<?> page){
+    public void updateModelAttributes(int pageNum, Page<?> page){
         List<?> listItems = page.getContent();
         int pageSize = page.getSize();
 
@@ -57,7 +54,7 @@ public class PagingAndSortingHelper {
             page = repo.findAll(pageable);
         }
 
-        updateModeAttributes(pageNum, page);
+        updateModelAttributes(pageNum, page);
     }
 
     public Pageable createPageable(int pageSize, int pageNum) {

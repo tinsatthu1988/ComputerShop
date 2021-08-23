@@ -8,9 +8,7 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.shopme.common.entity.Product;
@@ -50,7 +48,7 @@ public class ProductService {
             }
         }
 
-        helper.updateModeAttributes(pageNum, page);
+        helper.updateModelAttributes(pageNum, page);
     }
 
     public Product save(Product product) {
