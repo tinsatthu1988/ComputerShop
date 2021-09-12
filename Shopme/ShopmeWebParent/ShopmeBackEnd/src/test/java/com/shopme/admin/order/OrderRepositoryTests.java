@@ -14,11 +14,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.Order;
-import com.shopme.common.entity.OrderDetail;
-import com.shopme.common.entity.OrderStatus;
-import com.shopme.common.entity.PaymentMethod;
-import com.shopme.common.entity.Product;
+import com.shopme.common.entity.order.Order;
+import com.shopme.common.entity.order.OrderDetail;
+import com.shopme.common.entity.order.OrderStatus;
+import com.shopme.common.entity.order.PaymentMethod;
+import com.shopme.common.entity.product.Product;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -30,22 +30,22 @@ public class OrderRepositoryTests {
 
     @Test
     public void testCreateNewOrderWithSingleProduct() {
-        Customer customer = entityManager.find(Customer.class, 1);
-        Product product = entityManager.find(Product.class, 1);
+        Customer customer = entityManager.find(Customer.class, 4);
+        Product product = entityManager.find(Product.class, 6);
 
         Order mainOrder = new Order();
         mainOrder.setOrderTime(new Date());
         mainOrder.setCustomer(customer);
         mainOrder.copyAddressFromCustomer();
 
-        mainOrder.setShippingCost(10);
+        mainOrder.setShippingCost(30);
         mainOrder.setProductCost(product.getCost());
         mainOrder.setTax(0);
         mainOrder.setSubtotal(product.getPrice());
-        mainOrder.setTotal(product.getPrice() + 10);
+        mainOrder.setTotal(product.getPrice() + 30);
 
-        mainOrder.setPaymentMethod(PaymentMethod.CREDIT_CARD);
-        mainOrder.setStatus(OrderStatus.NEW);
+        mainOrder.setPaymentMethod(PaymentMethod.COD);
+        mainOrder.setStatus(OrderStatus.PROCESSING);
         mainOrder.setDeliverDate(new Date());
         mainOrder.setDeliverDays(1);
 
@@ -53,8 +53,8 @@ public class OrderRepositoryTests {
         orderDetail.setProduct(product);
         orderDetail.setOrder(mainOrder);
         orderDetail.setProductCost(product.getCost());
-        orderDetail.setShippingCost(10);
-        orderDetail.setQuantity(1);
+        orderDetail.setShippingCost(30);
+        orderDetail.setQuantity(2);
         orderDetail.setSubtotal(product.getPrice());
         orderDetail.setUnitPrice(product.getPrice());
 
@@ -67,9 +67,9 @@ public class OrderRepositoryTests {
 
     @Test
     public void testCreateNewOrderWithMultipleProducts() {
-        Customer customer = entityManager.find(Customer.class, 1);
-        Product product1 = entityManager.find(Product.class, 3);
-        Product product2 = entityManager.find(Product.class, 5);
+        Customer customer = entityManager.find(Customer.class, 5);
+        Product product1 = entityManager.find(Product.class, 4);
+        Product product2 = entityManager.find(Product.class, 1);
 
         Order mainOrder = new Order();
         mainOrder.setOrderTime(new Date());
@@ -90,8 +90,8 @@ public class OrderRepositoryTests {
         orderDetail2.setOrder(mainOrder);
         orderDetail2.setProductCost(product2.getCost());
         orderDetail2.setShippingCost(20);
-        orderDetail2.setQuantity(2);
-        orderDetail2.setSubtotal(product2.getPrice() * 2);
+        orderDetail2.setQuantity(3);
+        orderDetail2.setSubtotal(product2.getPrice() * 3);
         orderDetail2.setUnitPrice(product2.getPrice());
 
         mainOrder.getOrderDetails().add(orderDetail1);
@@ -100,7 +100,7 @@ public class OrderRepositoryTests {
         mainOrder.setShippingCost(30);
         mainOrder.setProductCost(product1.getCost() + product2.getCost());
         mainOrder.setTax(0);
-        float subtotal = product1.getPrice() + product2.getPrice() * 2;
+        float subtotal = product1.getPrice() + product2.getPrice() * 3;
         mainOrder.setSubtotal(subtotal);
         mainOrder.setTotal(subtotal + 30);
 

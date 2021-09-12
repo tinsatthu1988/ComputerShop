@@ -8,13 +8,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
-import com.shopme.common.entity.Order;
+import com.shopme.common.entity.order.Order;
 
 import java.util.NoSuchElementException;
 
 @Service
 public class OrderService {
-    private static final int ORDERS_PER_PAGE = 10;
+    private static final int ORDERS_PER_PAGE = 5;
 
     @Autowired private OrderRepository repo;
 
@@ -51,5 +51,14 @@ public class OrderService {
         } catch (NoSuchElementException ex) {
             throw new OrderNotFoundException("Could not find any orders with ID " + id);
         }
+    }
+
+    public void delete(Integer id) throws OrderNotFoundException {
+        Long count = repo.countById(id);
+        if (count == null || count == 0) {
+            throw new OrderNotFoundException("Could not find any orders with ID " + id);
+        }
+
+        repo.deleteById(id);
     }
 }

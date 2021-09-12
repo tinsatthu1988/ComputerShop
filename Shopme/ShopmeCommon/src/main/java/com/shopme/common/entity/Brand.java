@@ -7,11 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "brands")
-public class Brand {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Brand extends IdBasedEntity{
 
     @Column(length = 45, nullable = false, unique = true)
     private String name;
@@ -46,14 +42,6 @@ public class Brand {
     public Brand(String name) {
         this.name = name;
         this.logo = "brand-logo.png";
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

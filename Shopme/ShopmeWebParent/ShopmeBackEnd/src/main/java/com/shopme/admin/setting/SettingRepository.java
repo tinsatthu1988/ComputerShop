@@ -1,9 +1,9 @@
 package com.shopme.admin.setting;
 
-import com.shopme.common.entity.SettingCategory;
+import com.shopme.common.entity.setting.SettingCategory;
 import org.springframework.data.repository.CrudRepository;
 
-import com.shopme.common.entity.Setting;
+import com.shopme.common.entity.setting.Setting;
 
 import java.util.List;
 
