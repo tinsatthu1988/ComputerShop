@@ -11,10 +11,6 @@ import javax.persistence.Table;
 @Table(name="currencies")
 public class Currency extends IdBasedEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Column(length = 64, nullable = false)
     private String name;
 
