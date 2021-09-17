@@ -64,7 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .rememberMe()
                     .key("AbcDefgHIkliMn_1234567890")
                     .tokenValiditySeconds(7 * 24 * 60 * 60);
-        ;
+                ;
+        http.headers().frameOptions().sameOrigin();
     }
 
     @Override
