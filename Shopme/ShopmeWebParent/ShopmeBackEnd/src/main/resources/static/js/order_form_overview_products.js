@@ -68,6 +68,7 @@ function updateOrderAmounts() {
     setAndFormatNumberForField("shippingCost", shippingCost);
 
     tax = getNumberValueRemovedThousandSeparator(fieldTax);
+
     orderTotal = orderSubtotal + tax + shippingCost;
     setAndFormatNumberForField("total", orderTotal);
 }

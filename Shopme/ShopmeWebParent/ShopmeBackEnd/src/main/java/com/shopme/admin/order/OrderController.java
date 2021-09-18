@@ -164,12 +164,6 @@ public class OrderController {
         Set<OrderDetail> orderDetails = order.getOrderDetails();
 
         for (int i = 0; i < detailIds.length; i++) {
-            System.out.println("Detail ID: " + detailIds[i]);
-            System.out.println("\t Prodouct ID: " + productIds[i]);
-            System.out.println("\t Cost: " + productDetailCosts[i]);
-            System.out.println("\t Quantity: " + quantities[i]);
-            System.out.println("\t Subtotal: " + productSubtotals[i]);
-            System.out.println("\t Ship cost: " + productShipCosts[i]);
 
             OrderDetail orderDetail = new OrderDetail();
             Integer detailId = Integer.parseInt(detailIds[i]);
