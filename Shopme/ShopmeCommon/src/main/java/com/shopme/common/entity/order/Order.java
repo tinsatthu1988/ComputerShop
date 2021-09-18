@@ -6,6 +6,7 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.IdBasedEntity;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -39,10 +40,10 @@ public class Order extends AbstractAddress {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails = new HashSet<>();
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("updatedTime ASC")
     private List<OrderTrack> orderTracks = new ArrayList<>();
 
@@ -223,5 +224,15 @@ public class Order extends AbstractAddress {
     public String getDeliverDateOnForm() {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormatter.format(this.deliverDate);
+    }
+
+    public void setDeliverDateOnForm(String dateString) {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            this.deliverDate = dateFormatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
